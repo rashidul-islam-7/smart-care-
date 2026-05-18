@@ -22,7 +22,7 @@ const Navbar = () => {
 
             <li>
                 <Link
-                    href="/appointment"
+                    href="/appointments"
                     className={`bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/appointment" && "text-green-500"}`}
                 >
                     Appointments
@@ -37,12 +37,14 @@ const Navbar = () => {
                     Dashboard
                 </Link>
             </li>
+
         </ul>
     );
 
     return (
-        <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-gray-100">
-            <div className="navbar max-w-7xl mx-auto px-4 md:px-8 py-2">
+        <header className="sticky top-0 z-50 backdrop-blur-md
+         bg-white/80 border-b border-gray-100">
+            <div className="navbar max-w-7xl mx-auto px-4 md:px-10 py-2">
 
                 {/* Left Side */}
                 <div className="navbar-start">
@@ -85,7 +87,7 @@ const Navbar = () => {
                         {/* Login */}
                         <Link
                             href="/login"
-                            className="px-5 py-1 rounded-sm border border-green-500 text-green-700 font-medium hover:bg-green-50 transition-all duration-300"
+                            className="px-5 py-1 rounded-sm border border-green-500 text-green-700 font-medium hover:bg-green-50  hover:shadow-lg transition-all duration-300"
                         >
                             Log In
                         </Link>
@@ -93,7 +95,7 @@ const Navbar = () => {
                         {/* Signup */}
                         <Link
                             href="/signup"
-                            className="hidden md:flex px-5 py-1 rounded-sm bg-linear-to-r from-[#1491fa] to-sky-500 text-white font-semibold shadow-md hover:scale-105 transition-all duration-300"
+                            className="hidden md:flex px-5 py-1 rounded-sm bg-linear-to-r from-[#0a81e3] to-sky-400 text-white font-semibold  hover:shadow-lg transition-all duration-300"
                         >
                             Sign Up
                         </Link>

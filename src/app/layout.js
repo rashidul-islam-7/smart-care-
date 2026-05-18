@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const roboto = Roboto({
- variable: "--font-roboto-sans",
+const roboto = Roboto({
+  weight: "400",
   subsets: ["latin"],
-})
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={` ${geistSans.variable} ${roboto.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar />
