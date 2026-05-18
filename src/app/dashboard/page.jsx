@@ -1,10 +1,12 @@
 
+import DoctorDetail from '@/components/ui/DoctorDetailHero';
 import React from 'react';
 
 const DashboardPage = () => {
     return (
         <div>
-            DashboardPage
+        dashboard page
+        
         </div>
     );
 };

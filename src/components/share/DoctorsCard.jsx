@@ -78,7 +78,7 @@ const DoctorCard = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Link href={`#`}>
+                    <Link href={`/appointments/20`}>
                         <Button
                             className="w-full inline-flex text-center justify-center mt-2"
                         >

@@ -1,11 +1,12 @@
+import DoctorDetailHeroSection from '@/components/ui/DoctorDetailHero';
 import React from 'react';
 
-const DetailPage = () => {
+const DoctorDetailPage = () => {
     return (
         <div>
-            DetailPage
+           <DoctorDetailHeroSection />
         </div>
     );
 };
 
-export default DetailPage;
+export default DoctorDetailPage;
