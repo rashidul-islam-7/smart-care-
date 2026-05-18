@@ -66,10 +66,10 @@ const DoctorCard = () => {
                             <span>Every Friday & Sunday</span>
                         </div>
 
-                        <div className="flex items-center gap-2">
+                        {/* <div className="flex items-center gap-2">
                             <Clock3 size={18} className="text-green-600" />
                             <span>10:00 AM - 01:00 PM</span>
-                        </div>
+                        </div> */}
 
                         <div className="flex items-center gap-2">
                             <MapPin size={18} className="text-green-600" />
