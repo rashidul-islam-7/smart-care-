@@ -23,7 +23,7 @@ const Navbar = () => {
             <li>
                 <Link
                     href="/appointments"
-                    className={`bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/appointment" && "text-green-500"}`}
+                    className={`bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/appointments" && "text-green-500"}`}
                 >
                     Appointments
                 </Link>
