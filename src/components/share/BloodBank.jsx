@@ -115,28 +115,6 @@ const BloodBankSection = () => {
                         />
 
                         {/* Overlay Card */}
-                        {/* <div className="absolute bottom-5 left-5 right-5 bg-white/10 backdrop-blur-md rounded-2xl p-5 shadow-lg border border-white/40">
-                            <h4 className="text-lg font-bold text-green-400">
-                                Immediate Response Team
-                            </h4>
-                            <p className="text-xs sm:text-sm text-gray-200 mt-1.5 leading-relaxed">
-                                Need a specific blood group instantly? Connect with live coordinators ready to help round the clock.
-                            </p>
-                            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
-                                <span className="text-blue-500 font-bold text-xs sm:text-sm tracking-wide uppercase flex items-center gap-1.5">
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500 mr-1 inline-block animate-ping">
-                                        </span> 
-                                        
-                                        Available 24/7
-                                </span>
-                                <button className="px-4 py-2 rounded-xl bg-gray-900 text-white text-xs font-semibold hover:bg-gray-800 transition-all duration-300 cursor-pointer">
-                                    Contact Now
-                                </button>
-                            </div>
-                        </div> */}
-
-
-                        {/* Overlay Card */}
                         <div className="absolute bottom-5 left-5 right-5 bg-black/30 backdrop-blur-xl rounded-2xl p-5 shadow-2xl border border-white/10">
 
                             {/* Title */}

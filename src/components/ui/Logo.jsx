@@ -7,7 +7,7 @@ const Logo = () => {
     return (
         <div>
             <Link href={"/"}>
-                <div className='flex justify-center items-center gap-1 drop-shadow drop-shadow-green-200/30'>
+                <div className='flex justify-center items-center gap-1 drop-shadow '>
                     {/* <Image width={200} height={200} src={'/smartCart_logo_1.png'} alt='Smart Care + logo' ></Image> */}
                     <Image width={50} height={50} src={'/logo.png'} alt='Smart Care + logo' ></Image>
                     <h1 className='text-xl md:text-2xl font-semibold text-blue-800'>smart<span className='text-green-500'>Care<span className='text-2xl md:text-3xl bg-linear-to-r
