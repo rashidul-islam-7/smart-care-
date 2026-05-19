@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Menu, Stethoscope } from "lucide-react";
+import { Menu } from "lucide-react";
 import Logo from "../ui/Logo";
 import { usePathname } from 'next/navigation'
 

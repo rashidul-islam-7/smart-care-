@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import { Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
