@@ -10,7 +10,7 @@ const Button = ({
     return (
         <Link
             href={href}
-            className={`group inline-block px-5 py-3 rounded-sm bg-linear-to-r from-[#0a81e3] to-sky-400 text-white font-semibold hover:shadow-xl transition-all duration-300 ${className}`}
+            className={`group inline-block px-8 py-3 text-white text-md font-semibold shadow-lg  hover:shadow-blue-500/30 transition-all duration-300 rounded-xl bg-linear-to-r from-[#0a81e3] to-sky-400   ${className}`}
         >
             <div className="group flex justify-center items-center gap-2 ">
                 {children}

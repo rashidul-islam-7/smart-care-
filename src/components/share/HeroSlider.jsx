@@ -33,7 +33,7 @@ const HeroSlider = () => {
     }, []);
 
     return (
-        <section className="relative h-[100vh]  overflow-hidden bg-black">
+        <section className="relative h-[90vh]  overflow-hidden bg-black">
 
             {/* Background Images  */}
             {images.map((img, index) => (
@@ -68,7 +68,7 @@ const HeroSlider = () => {
                         </span> */}
 
                         {/* Main Headline */}
-                        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
                             Smart Healthcare
                             <br />
 
@@ -79,7 +79,7 @@ const HeroSlider = () => {
 
 
                         {/* Sub-headline */}
-                        <p className="text-lg text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        <p className="text-md text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                             Easily book appointments with experienced specialists, manage your healthcare journey,
                             and access quality medical services anytime, anywhere.
                         </p>

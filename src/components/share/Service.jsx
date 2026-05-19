@@ -50,30 +50,30 @@ const HealthcareServiceSection = () => {
     ];
 
     return (
-        <section className="bg-[#f7f8fc] py-10 md:py-20 px-5 md:px-10 lg:px-20 overflow-hidden">
+        <section className=" py-10 md:py-20 px-5 md:px-10 lg:px-20 overflow-hidden max-w-7xl mx-auto">
 
             {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="text-center max-w-xl mx-auto mb-16">
                 <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full
                  bg-sky-100 text-sky-700 text-sm font-semibold">
                     <span><BsHeartPulseFill className="text-red-600" size={18} /> </span> SmartCare+ Healthcare Services
 
                 </span>
 
-                <h2 className="mt-5 text-3xl md:text-5xl font-extrabold text-gray-800 leading-tight">
+                <h2 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
                     Complete Healthcare
                     <span className="bg-linear-to-r from-sky-500 to-green-500 bg-clip-text text-transparent">
                         {" "}Solutions
                     </span>
                 </h2>
 
-                <p className="mt-5 text-md md:text-lg text-gray-500 leading-relaxed">
+                <p className="mt-5 text-md text-gray-500 leading-relaxed">
                     SmartCare+ provides trusted doctor consultations,
                     medical services, laboratory support, and seamless
                     appointment booking for better healthcare experiences.
                 </p>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 {services.map((item) => (
                     <div
                         key={item.id}
@@ -104,7 +104,7 @@ const HealthcareServiceSection = () => {
                                 {item.desc}
                             </p>
 
-                            <button className="mt-3 inline-flex items-center gap-2 text-sky-600 font-semibold hover:gap-3 transition-all duration-300">
+                            <button className="cursor-pointer mt-3 inline-flex items-center gap-2 text-sky-600 font-semibold hover:gap-3 transition-all duration-300">
                                 Read More
                                 <ArrowRight size={18} />
                             </button>
