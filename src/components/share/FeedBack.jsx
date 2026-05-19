@@ -114,7 +114,7 @@ const reviews = [
     },
 ];
 
-const PatientReviews = () => {
+const FeedBacks = () => {
     return (
         <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20 bg-slate-50 text-gray-800 overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -236,4 +236,4 @@ const PatientReviews = () => {
     );
 };
 
-export default PatientReviews;
+export default FeedBacks;

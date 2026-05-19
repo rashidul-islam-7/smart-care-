@@ -14,7 +14,7 @@ const Navbar = () => {
             <li>
                 <Link
                     href="/"
-                    className={`bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/" && "text-green-500"}`}
+                    className={`text-lg  bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/" && "text-green-500"}`}
                 >
                     Home
                 </Link>
@@ -23,7 +23,7 @@ const Navbar = () => {
             <li>
                 <Link
                     href="/appointments"
-                    className={`bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/appointments" && "text-green-500"}`}
+                    className={`text-lg  bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/appointments" && "text-green-500"}`}
                 >
                     Appointments
                 </Link>
@@ -32,7 +32,7 @@ const Navbar = () => {
             <li>
                 <Link
                     href="/dashboard"
-                    className={`bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/dashboard" && "text-green-500"}`}
+                    className={`text-lg  bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/dashboard" && "text-green-500"}`}
                 >
                     Dashboard
                 </Link>
