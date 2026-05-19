@@ -14,7 +14,7 @@ const Navbar = () => {
             <li>
                 <Link
                     href="/"
-                    className={`text-lg  bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/" && "text-green-500"}`}
+                    className={`text-lg bg-transparent hover:bg-transparent active:bg-transparent focus:bg-transparent text-gray-700 hover:text-green-600 rounded-none px-2 ${pathname === "/" && "text-green-500"}`}
                 >
                     Home
                 </Link>
@@ -87,7 +87,7 @@ const Navbar = () => {
                         {/* Login */}
                         <Link
                             href="/login"
-                            className="px-5 py-1 rounded-sm border border-green-500 text-green-700 font-medium hover:bg-green-50  hover:shadow-lg transition-all duration-300"
+                            className="px-5 py-1 rounded-sm border border-green-500 text-green-700 font-medium hover:bg-green-50 text-lg hover:shadow-lg transition-all duration-300"
                         >
                             Log In
                         </Link>
@@ -95,7 +95,7 @@ const Navbar = () => {
                         {/* Signup */}
                         <Link
                             href="/signup"
-                            className="hidden md:flex px-5 py-1 rounded-sm bg-linear-to-r from-[#0a81e3] to-sky-400 text-white font-semibold  hover:shadow-lg transition-all duration-300"
+                            className="hidden md:flex px-5 py-1 rounded-sm bg-linear-to-r from-[#032744] to-sky-400 text-white font-semibold text-lg  hover:shadow-lg transition-all duration-300"
                         >
                             Sign Up
                         </Link>

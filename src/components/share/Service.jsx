@@ -60,7 +60,7 @@ const HealthcareServiceSection = () => {
 
                 </span>
 
-                <h2 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight">
+                <h2 className="mt-5 text-3xl md:text-4xl font-extrabold text-gray-800 leading-tight">
                     Complete Healthcare
                     <span className="bg-linear-to-r from-sky-500 to-green-500 bg-clip-text text-transparent">
                         {" "}Solutions

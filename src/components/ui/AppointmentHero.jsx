@@ -27,7 +27,7 @@ const AppointmentPageHero = () => {
                 </span>
 
                 {/* Heading */}
-                <h1 className="mt-4 text-3xl md:text-5xl font-bold leading-tight text-gray-800">
+                <h1 className="mt-4 text-3xl md:text-4xl font-bold leading-tight text-gray-800">
                     Meet Our
                     <span className="bg-linear-to-r from-blue-600
                          to-green-500 bg-clip-text text-transparent">

@@ -21,7 +21,7 @@ const BloodBankSection = () => {
                     </div>
 
                     {/* Heading */}
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-800 tracking-tight !leading-tight">
+                    <h2 className="text-3xl text-4xl font-black text-gray-800 tracking-tight !leading-tight">
                         Donate Blood, <br />
                         <span className="bg-linear-to-r from-red-500 to-pink-500 bg-clip-text text-transparent">
                             Save Precious Lives

@@ -68,7 +68,7 @@ const HeroSlider = () => {
                         </span> */}
 
                         {/* Main Headline */}
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                        <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
                             Smart Healthcare
                             <br />
 

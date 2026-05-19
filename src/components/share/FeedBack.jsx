@@ -126,7 +126,7 @@ const FeedBacks = () => {
                             <span><BsStars size={14} /></span> Patient Stories
                         </span>
 
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight !leading-tight">
+                        <h2 className="text-3xl md:text-4xl  font-black text-gray-900 tracking-tight !leading-tight">
                             Trusted by{" "}
                             <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
                                 Thousands
