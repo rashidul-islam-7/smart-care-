@@ -48,16 +48,16 @@ const TopDoctors = () => {
                     </p>
                 </div>
 
-                {/* Minimal Grid Layout */}
-                <div className="flex justify-evenly items-center">
+                {/* card*/}
+                <div className="flex flex-wrap gap-10 justify-evenly items-center">
                     {doctorsData.map((doctor) => (
                         <div
                             key={doctor.id}
                             className="group "
                         >
-                            <div className="text-center w-fit">
+                            <div className="text-center w-fit group  ">
                                 {/* Minimalist Image Container */}
-                                <div className="relative aspect-square h-44 w-44 rounded-full overflow-hidden bg-slate-50 mb-4">
+                                <div className="relative aspect-square md:h-44 h-32 md:w-44 w-32 rounded-full overflow-hidden bg-slate-50 mb-4">
                                     <img
                                         src={doctor.img}
                                         alt={doctor.name}
@@ -69,7 +69,7 @@ const TopDoctors = () => {
                                 <div className="flex justify-center items-center flex-col">
                                     <p className="font-semibold text-lg -mt-1">{doctor.name}</p>
                                     <p className="text-xs text-gray-400 mb-3"><span></span> {doctor.specialist}</p>
-                                    <button className="flex justify-center items-center gap-1 bg-blue-800/40 w-full py-1 rounded-full text-white text-sm">View Details <span ><IoIosArrowForward /> </span></button>
+                                    <button className="flex cursor-pointer justify-center items-center gap-1 bg-blue-600 hover:bg-blue-700   w-full py-1 rounded-full text-white text-sm transition-all duration-300">View Details <span className="group-hover:translate-x-2 transition-all duration-300" ><IoIosArrowForward /> </span></button>
                                 </div>
                             </div>
                         </div>

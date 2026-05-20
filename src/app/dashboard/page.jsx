@@ -16,6 +16,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import { FaUser } from "react-icons/fa6";
+import { AlertDialog, Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 
 const bookings = [
     {
@@ -58,7 +59,6 @@ const MyBookingsPage = () => {
     return (
         <section className="min-h-screen">
             <div className="max-w-7xl mx-auto mb-15 md:mb-20">
-
                 {/* Header */}
                 <div className="relative overflow-hidden py-15 px-5 md:px-10">
 
@@ -109,17 +109,16 @@ const MyBookingsPage = () => {
 
                 {/* Booking Cards */}
                 <div className="space-y-5 max-w-4xl mx-auto">
-
                     {bookings.map((booking) => (
                         <div
                             key={booking.id}
                             className="group relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-[0_8px_40px_rgba(15,23,42,0.06)] hover:shadow-[0_20px_60px_rgba(15,23,42,0.12)] transition-all duration-500"
                         >
-                            <div className="p-7">
+                            <div className="px-5 py-6 md:p-7">
                                 {/* Top Content */}
                                 <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8">
 
-                                    <div className="flex justify-between items-start gap-5 flex-1">
+                                    <div className="flex flex-wrap justify-between items-start gap-2">
                                         {/* doctor info  */}
                                         <div className="flex justify-center items-center gap-4">
                                             {/* doctor img  */}
@@ -158,9 +157,9 @@ const MyBookingsPage = () => {
                                         </div>
 
                                         {/* Date & Time & serial */}
-                                        <div className="flex flex-wrap gap-3 mt-5">
+                                        <div className="flex flex-wrap gap-2 md:gap-3 mt-5">
                                             {/* appointment Date  */}
-                                            <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200 px-3 py-2">
+                                            <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200 px-2.5 md:px-3 py-2">
                                                 <CalendarDays size={16} className="text-blue-600" />
 
                                                 <div>
@@ -174,7 +173,7 @@ const MyBookingsPage = () => {
                                                 </div>
                                             </div>
                                             {/* appointment Time  */}
-                                            <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200 px-3 py-2">
+                                            <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200 px-2.5 md:px-3 py-2">
                                                 <Clock3 size={16} className="text-emerald-600" />
 
                                                 <div>
@@ -189,7 +188,7 @@ const MyBookingsPage = () => {
                                             </div>
 
                                             {/* Serial no  */}
-                                            <div className="flex items-center gap-2 rounded-xl bg-amber-50 border border-amber-100 px-3 py-2">
+                                            <div className="flex items-center gap-2 rounded-xl bg-amber-50 border border-amber-100 px-2.5 md:px-3 py-2">
                                                 <ShieldCheck size={16} className="text-amber-600" />
 
                                                 <div>
@@ -267,7 +266,7 @@ const MyBookingsPage = () => {
                                 </div>
 
                                 {/* Location */}
-                                <div className="mt-6 rounded-2xl border border-slate-200 bg-linear-to-r from-slate-50 to-white p-5">
+                                <div className="mt-5 rounded-2xl border border-slate-200 bg-linear-to-r from-slate-50 to-white p-3 md:p-5">
 
                                     <div className="flex items-start gap-4">
 
@@ -308,24 +307,105 @@ const MyBookingsPage = () => {
                                 </div>
 
                                 {/* Footer */}
-                                <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-6">
+                                <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-5">
 
-                                    <div className="flex items-center gap-2 text-sm text-slate-500">
+                                    <div className="hidden md:flex items-center gap-2 text-sm text-slate-500">
                                         <Phone size={15} />
                                         {booking.phone}
                                     </div>
 
                                     <div className="flex items-center gap-3">
+                                        {/* edit info modal  */}
+                                        <Modal>
+                                            <Button className="h-11 px-5 rounded-xl cursor-pointer border border-slate-200 bg-white text-slate-700 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 hover:shadow-sm transition-all active:scale-95">
+                                                <Pencil size={16} />
+                                                Edit Patient Info
+                                            </Button>
 
-                                        <button className="h-11 px-5 rounded-xl cursor-pointer border border-slate-200 bg-white text-slate-700 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 hover:shadow-sm transition-all active:scale-95">
-                                            <Pencil size={16} />
-                                            Reschedule
-                                        </button>
+                                            <Modal.Backdrop>
+                                                <Modal.Container placement="auto">
+                                                    <Modal.Dialog className="sm:max-w-md">
+                                                        <Modal.CloseTrigger />
+                                                        <Modal.Header>
+                                                            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
 
-                                        <button className="h-11 px-5 rounded-xl cursor-pointer bg-red-50 text-red-600 text-sm font-semibold flex items-center gap-2 hover:bg-red-100 transition-all active:scale-95">
-                                            <Trash2 size={16} />
-                                            Cancel Booking
-                                        </button>
+                                                            </Modal.Icon>
+                                                            <Modal.Heading>Contact Us</Modal.Heading>
+                                                            <p className="mt-1.5 text-sm leading-5 text-muted">
+                                                                Fill out the form below and we'll get back to you. The modal adapts automatically
+                                                                when the keyboard appears on mobile.
+                                                            </p>
+                                                        </Modal.Header>
+                                                        <Modal.Body className="p-6">
+                                                            <Surface variant="default">
+                                                                <form className="flex flex-col gap-4">
+                                                                    <TextField className="w-full" name="name" type="text">
+                                                                        <Label>Name</Label>
+                                                                        <Input placeholder="Enter your name" />
+                                                                    </TextField>
+                                                                    <TextField className="w-full" name="email" type="email">
+                                                                        <Label>Email</Label>
+                                                                        <Input placeholder="Enter your email" />
+                                                                    </TextField>
+                                                                    <TextField className="w-full" name="phone" type="tel">
+                                                                        <Label>Phone</Label>
+                                                                        <Input placeholder="Enter your phone number" />
+                                                                    </TextField>
+                                                                    <TextField className="w-full" name="company">
+                                                                        <Label>Company</Label>
+                                                                        <Input placeholder="Enter your company name" />
+                                                                    </TextField>
+                                                                    <TextField className="w-full" name="message">
+                                                                        <Label>Message</Label>
+                                                                        <Input placeholder="Enter your message" />
+                                                                    </TextField>
+                                                                </form>
+                                                            </Surface>
+                                                        </Modal.Body>
+                                                        <Modal.Footer>
+                                                            <Button slot="close" variant="secondary">
+                                                                Cancel
+                                                            </Button>
+                                                            <Button slot="close">Edit Save</Button>
+                                                        </Modal.Footer>
+                                                    </Modal.Dialog>
+                                                </Modal.Container>
+                                            </Modal.Backdrop>
+                                        </Modal>
+
+
+                                        {/* cancel Booking alert dialog  */}
+                                        <AlertDialog>
+                                            <Button className="h-11 px-5 rounded-xl cursor-pointer bg-red-50 text-red-600 text-sm font-semibold flex items-center gap-2 hover:bg-red-100 transition-all active:scale-95">
+                                                <Trash2 size={16} />
+                                                Cancel Booking
+                                            </Button>
+                                            <AlertDialog.Backdrop>
+                                                <AlertDialog.Container>
+                                                    <AlertDialog.Dialog className="sm:max-w-[400px]">
+                                                        <AlertDialog.CloseTrigger />
+                                                        <AlertDialog.Header>
+                                                            <AlertDialog.Icon status="danger" />
+                                                            <AlertDialog.Heading>Delete project permanently?</AlertDialog.Heading>
+                                                        </AlertDialog.Header>
+                                                        <AlertDialog.Body>
+                                                            <p>
+                                                                This will permanently delete <strong>My Awesome Project</strong> and all of its
+                                                                data. This action cannot be undone.
+                                                            </p>
+                                                        </AlertDialog.Body>
+                                                        <AlertDialog.Footer>
+                                                            <Button slot="close" variant="tertiary">
+                                                                Cancel
+                                                            </Button>
+                                                            <Button slot="close" variant="danger">
+                                                                You Sure Cancel Booking?
+                                                            </Button>
+                                                        </AlertDialog.Footer>
+                                                    </AlertDialog.Dialog>
+                                                </AlertDialog.Container>
+                                            </AlertDialog.Backdrop>
+                                        </AlertDialog>
                                     </div>
                                 </div>
                             </div>
