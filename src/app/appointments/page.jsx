@@ -5,7 +5,6 @@ import React from 'react';
 
 const AllAppointmentsPage = async () => {
     const doctorsData = await getDoctors();
-    console.log(doctorsData)
 
     return (
         <div className='bg-linear-to-r from-sky-50 via-white to-green-50'>

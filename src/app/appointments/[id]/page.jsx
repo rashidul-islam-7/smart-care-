@@ -1,12 +1,18 @@
+
 import React from 'react';
 import DoctorDetailHeroSection from '@/components/ui/DoctorDetailHero';
 import Image from 'next/image';
-
-import doctor from "@/assets/Doctors/doctor_1.webp"
-import { FaArrowDown, FaArrowRight, FaCalendar, FaCalendarCheck, FaLocationDot, FaMoneyBill, FaMoneyCheck, FaStar } from 'react-icons/fa6';
+import { FaArrowRight, FaCalendar, FaCalendarCheck, FaLocationDot, FaMoneyCheck, FaStar } from 'react-icons/fa6';
 import Button from '@/components/ui/Button';
+import { getDoctorId } from '@/lib/Data';
 
-const DoctorDetailPage = () => {
+const DoctorDetailPage = async ({ params }) => {
+    const { id } = await params;
+    const doctorDetails = await getDoctorId(id);
+
+    const { _id, name, specialist, fee, image, experience, availabilityDays, availabilityTimes, description, hospital, location, rating } = doctorDetails;
+
+
     return (
         <div>
             <DoctorDetailHeroSection />
@@ -25,7 +31,7 @@ const DoctorDetailPage = () => {
                     <div className="text-center">
                         <div className="relative w-40 h-40 mx-auto rounded-xl overflow-hidden border-4 border-sky-100 shadow-lg shadow-sky-100">
                             <Image
-                                src={doctor}
+                                src={image}
                                 alt="Doctor"
                                 fill
                                 className="object-cover"
@@ -33,13 +39,13 @@ const DoctorDetailPage = () => {
                         </div>
 
                         <h3 className="mt-4 text-2xl font-semibold text-gray-800">
-                            Dr. Rakib Hassan
+                            {name}
                         </h3>
 
-                        <p className="text-sky-600 font-medium">Cardiology Specialist</p>
+                        <p className="text-sky-600 font-medium">{specialist}</p>
 
                         <p className="text-gray-500 text-sm mt-1">
-                            Smart Care Hospital, Bonani, Bogura
+                            {hospital}, {location}
                         </p>
                     </div>
 
@@ -47,12 +53,12 @@ const DoctorDetailPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-center">
 
                         <div className="p-4 rounded-xl bg-sky-50 border border-sky-100">
-                            <h2 className="text-xl font-bold text-gray-800">10+ Years</h2>
+                            <h2 className="text-xl font-bold text-gray-800">{experience}+ Years</h2>
                             <p className="text-gray-500 text-sm uppercase">Experience</p>
                         </div>
 
                         <div className="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
-                            <h2 className="text-xl flex justify-center items-center gap-1 font-bold text-gray-800">4.9 <span><FaStar className='text-yellow-500 -mt-1' size={18} /> </span></h2>
+                            <h2 className="text-xl flex justify-center items-center gap-1 font-bold text-gray-800">{rating} <span><FaStar className='text-yellow-500 -mt-1' size={18} /> </span></h2>
                             <p className="text-gray-500 text-sm uppercase">Rating</p>
                         </div>
 
@@ -69,7 +75,7 @@ const DoctorDetailPage = () => {
                             <FaLocationDot className="text-green-600 mt-1" />
                             <div>
                                 <p className="font-semibold text-gray-700">Location</p>
-                                <p className="text-gray-500">Smart Care Hospital, Bonani, Bogura</p>
+                                <p className="text-gray-500"> {hospital}, {location}</p>
                             </div>
                         </div>
 
@@ -77,7 +83,7 @@ const DoctorDetailPage = () => {
                             <FaCalendarCheck className="text-green-600 mt-1" />
                             <div>
                                 <p className="font-semibold text-gray-700">Availability</p>
-                                <p className="text-gray-500">Every Friday & Sunday (10:00 AM - 1:00 PM)</p>
+                                <p className="text-gray-500">Every {availabilityDays.map((day) => day.slice()).join(" ,")} - {availabilityTimes}</p>
                             </div>
                         </div>
 
@@ -85,7 +91,7 @@ const DoctorDetailPage = () => {
                             <FaMoneyCheck className="text-green-600 mt-1" />
                             <div>
                                 <p className="font-semibold text-gray-700">Consultation Fee</p>
-                                <p className="text-gray-500">1000 BDT</p>
+                                <p className="text-gray-500">{fee} BDT</p>
                             </div>
                         </div>
 
@@ -97,9 +103,7 @@ const DoctorDetailPage = () => {
                             About Doctor
                         </h4>
                         <p className="text-gray-500 leading-relaxed">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Fugit, provident nam. Fuga itaque amet quas consequatur hic
-                            optio eius veritatis.
+                            {description}
                         </p>
                     </div>
 

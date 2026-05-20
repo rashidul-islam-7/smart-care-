@@ -1,16 +1,14 @@
 import Image from "next/image";
 import React from "react";
-import { CalendarDays, MapPin, Star, Clock3, Stethoscope } from "lucide-react";
+import { CalendarDays, MapPin, Star, Stethoscope } from "lucide-react";
 import Button from "../ui/Button";
-
-import doctor from "@/assets/Doctors/doctor_1.webp"
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
 
 const DoctorCard = ({ doctor }) => {
 
-    const { name, specialist, degrees, image, experience, availabilityDays, availabilityTimes, description, hospital, location, fee, rating } = doctor
-    console.log(availabilityDays)
+    const { _id, name, specialist, degrees, image, experience, availabilityDays, availabilityTimes, description, hospital, location, rating } = doctor;
+
     return (
         <div className="relative overflow-hidden rounded-xl bg-white shadow-sm ">
             {/* Doctor Image */}
@@ -78,12 +76,11 @@ const DoctorCard = ({ doctor }) => {
                 </div>
 
                 {/* CTA Button */}
-                <Link href={`/appointments/20`}>
+                <Link href={`/appointments/${_id}`}>
                     <Button icon={<FaArrowRight />}
                         className="w-full inline-flex text-center justify-center mt-2"
                     >
                         View Details
-
                     </Button>
                 </Link>
             </div>
