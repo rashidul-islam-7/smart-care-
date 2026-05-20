@@ -18,8 +18,6 @@ const AllAppointmentsPage = async () => {
                     }
                 </div>
             </div>
-
-
         </div>
     );
 };
