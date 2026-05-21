@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export const postAppointmentData = async (formData) => {
   const res = await fetch("http://localhost:8000/appointments", {
     method: "POST",
@@ -8,5 +10,34 @@ export const postAppointmentData = async (formData) => {
   });
 
   const data = await res.json();
+  return data;
+};
+
+export const updateAppointmentData = async (id, formData) => {
+  const updateData = Object.fromEntries(formData.entries());
+
+  const res = await fetch(`http://localhost:8000/appointments/${id}`, {
+    method: "PATCH",
+
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(updateData),
+  });
+
+  const data = await res.json();
+
+  return data;
+};
+
+export const deleteAppointment = async (id) => {
+  const res = await fetch(`http://localhost:8000/appointments/${id}`, {
+    method: "DELETE",
+  });
+  const data = res.json();
+  if (data) {
+    redirect("/appointments");
+  }
   return data;
 };

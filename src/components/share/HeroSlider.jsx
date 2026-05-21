@@ -11,7 +11,7 @@ import slider_5 from "@/assets/hero_slider/Operation.png";
 import slider_6 from "@/assets/hero_slider/Laboratory.jpg";
 import Button from "../ui/Button";
 import { FaArrowRight } from "react-icons/fa";
-import { FaStar } from "react-icons/fa6";
+import { FaHeart, FaStar } from "react-icons/fa6";
 import Link from "next/link";
 
 const images = [
@@ -33,7 +33,7 @@ const HeroSlider = () => {
     }, []);
 
     return (
-        <section className="relative h-[90vh]  overflow-hidden bg-black">
+        <section className="relative lg-[90vh] lg:h-[100vh] pt-10 md:pt-10 md:pt-0  overflow-hidden bg-black">
 
             {/* Background Images  */}
             {images.map((img, index) => (
@@ -63,9 +63,9 @@ const HeroSlider = () => {
                 <div className="max-w-3xl text-center text-white">
                     <div className="lg:col-span-7 text-center lg:text-left space-y-6">
                         {/* Tag / Badge */}
-                        {/* <span className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-white  text-blue-800 shadow-sm shadow-cyan-100">
-                            💖 Best Digital Healthcare Platform
-                        </span> */}
+                        <span className=" items-center hidden lg:inline-flex gap-1.5 py-1.5 px-3 rounded-full text-xs font-semibold bg-white  text-blue-800 shadow-sm shadow-cyan-100">
+                            <FaHeart /> Best Digital Healthcare Platform
+                        </span>
 
                         {/* Main Headline */}
                         <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
@@ -85,10 +85,12 @@ const HeroSlider = () => {
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="">
-                            <Button href={'/appointments'} icon={<FaArrowRight />} >Book Appointment</Button>
+                       <div className="mb-8">
+                         <Link href={'/appointments'} className="cursor-pointer ">
+                            <Button  icon={<FaArrowRight />} >Book Appointment</Button>
 
-                        </div>
+                        </Link>
+                       </div>
 
                         {/* Trust Badges */}
                         <div className="py-8 border-t border-gray-50/30 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0 text-center lg:text-left">
