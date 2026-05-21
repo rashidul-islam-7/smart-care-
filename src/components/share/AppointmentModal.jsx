@@ -20,7 +20,7 @@ import { TiArrowSync } from "react-icons/ti";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
-const AppointmentModal = ({ doctorName, specialist, hospital, location }) => {
+const AppointmentModal = ({ doctorName, specialist, hospital, location, image }) => {
   // 2. Added state variables for error tracking and loading state
   const [formErrors, setFormErrors] = useState({});
   const [isPending, setIsPending] = useState(false);
@@ -85,6 +85,7 @@ const AppointmentModal = ({ doctorName, specialist, hospital, location }) => {
         specialist,
         hospital,
         location,
+        image,
       },
     };
 

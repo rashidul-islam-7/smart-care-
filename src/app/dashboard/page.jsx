@@ -1,61 +1,15 @@
+"use client"
+import { getAppointmentPatientData } from "@/lib/Data";
+import SwitchBtnDashboardProfile from "@/components/ui/SwitchBtn";
+import { useState } from "react";
+import { Sparkles } from "lucide-react";
+import AppointmentBookingCard from "@/components/AppointmentBookingCard";
+import UserProfile from "@/components/UserProfile";
 
-"use client";
-
-import Image from "next/image";
-import {
-    CalendarDays,
-    Clock3,
-    MapPin,
-    Phone,
-    Pencil,
-    Trash2,
-    Stethoscope,
-    ShieldCheck,
-    ChevronRight,
-    BadgeCheck,
-    Sparkles,
-} from "lucide-react";
-import { FaUser } from "react-icons/fa6";
-import { AlertDialog, Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
-
-const bookings = [
-    {
-        id: 1,
-        serial: "A-102",
-        status: "Upcoming",
-        doctorName: "Dr. Sarah Wilson",
-        specialist: "Cardiologist",
-        doctorImg: "https://i.pravatar.cc/300?img=32",
-        patientName: "Rashidul Islam",
-        gender: "Male",
-        age: 24,
-        phone: "+880 1712-345678",
-        appointmentDate: "25 May 2026",
-        appointmentTime: "10:30 AM",
-        location: "Square Hospital, Panthapath, Dhaka 1205, Bangladesh",
-        floorNo: "5th Floor",
-        roomNo: "503",
-    },
-    {
-        id: 2,
-        serial: "B-204",
-        status: "Confirmed",
-        doctorName: "Dr. Emily Watson",
-        specialist: "Neurologist",
-        doctorImg: "https://i.pravatar.cc/300?img=47",
-        patientName: "Rashidul Islam",
-        gender: "Male",
-        age: 24,
-        phone: "+880 1712-345678",
-        appointmentDate: "28 May 2026",
-        appointmentTime: "02:00 PM",
-        location: "United Hospital, Gulshan 2, Dhaka 1212, Bangladesh",
-        floorNo: "3rd Floor",
-        roomNo: "305",
-    },
-];
 
 const MyBookingsPage = () => {
+    const [switchBtn, setSwitchBtn] = useState("dashboard");
+
     return (
         <section className="min-h-screen">
             <div className="max-w-7xl mx-auto mb-15 md:mb-20">
@@ -74,23 +28,31 @@ const MyBookingsPage = () => {
                             </div>
 
                             <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-                                My Appointments
+                                {
+                                    switchBtn === "dashboard"
+                                        ? "My Appointments"
+                                        : "My Profile"
+                                }
                             </h1>
 
                             <p className="text-slate-500 mt-3 max-w-2xl leading-relaxed">
-                                Easily manage your upcoming consultations and appointments.
+                                {
+                                    switchBtn === "dashboard"
+                                        ? "Easily manage your upcoming consultations and appointments."
+                                        : "Manage your personal profile information and account settings."
+                                }
                             </p>
                         </div>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* <div className="grid grid-cols-2 gap-4">
                             <div className="rounded-xl bg-slate-50 border border-slate-200 py-1 px-6 ">
                                 <p className="text-sm text-slate-400">
                                     Total Bookings
                                 </p>
 
                                 <h3 className="text-3xl font-bold text-slate-900 mt-1">
-                                    {bookings.length}
+                                    {appointmentData.length}
                                 </h3>
                             </div>
 
@@ -100,318 +62,28 @@ const MyBookingsPage = () => {
                                 </p>
 
                                 <h3 className="text-3xl font-bold text-emerald-700 mt-1">
-                                    2
+                                    {appointmentData.length}
                                 </h3>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
-                {/* Booking Cards */}
-                <div className="space-y-5 max-w-4xl mx-auto">
-                    {bookings.map((booking) => (
-                        <div
-                            key={booking.id}
-                            className="group relative overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-[0_8px_40px_rgba(15,23,42,0.06)] hover:shadow-[0_20px_60px_rgba(15,23,42,0.12)] transition-all duration-500"
-                        >
-                            <div className="px-5 py-6 md:p-7">
-                                {/* Top Content */}
-                                <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8">
-
-                                    <div className="flex flex-wrap justify-between items-start gap-2">
-                                        {/* doctor info  */}
-                                        <div className="flex justify-center items-center gap-4">
-                                            {/* doctor img  */}
-                                            <div className="relative h-24 w-24 rounded-2xl overflow-hidden ring-4 ring-slate-100 shadow-md">
-                                                <img
-                                                    src={booking.doctorImg}
-                                                    alt={booking.doctorName}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                            </div>
-                                            {/* doctor info  */}
-                                            <div>
-                                                <div className="flex flex-wrap items-center gap-3 mb-3">
-                                                    <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 text-blue-700 px-3 py-1 text-xs font-semibold border border-blue-100">
-                                                        <Stethoscope size={13} />
-                                                        {booking.specialist}
-                                                    </span>
-
-                                                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-semibold border border-emerald-100">
-                                                        <BadgeCheck size={13} />
-                                                        {booking.status}
-                                                    </span>
-                                                </div>
-                                                {/* doctor name */}
-                                                <div>
-                                                    <h2 className="text-2xl font-bold text-slate-900">
-                                                        {booking.doctorName}
-                                                    </h2>
-
-                                                    <p className="text-slate-500 text-sm mt-1">
-                                                        Specialist Consultant
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Date & Time & serial */}
-                                        <div className="flex flex-wrap gap-2 md:gap-3 mt-5">
-                                            {/* appointment Date  */}
-                                            <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200 px-2.5 md:px-3 py-2">
-                                                <CalendarDays size={16} className="text-blue-600" />
-
-                                                <div>
-                                                    <p className="text-[11px] uppercase text-slate-400 font-medium">
-                                                        Date
-                                                    </p>
-
-                                                    <p className="text-sm font-semibold text-slate-800">
-                                                        {booking.appointmentDate}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            {/* appointment Time  */}
-                                            <div className="flex items-center gap-2 rounded-xl bg-slate-50 border border-slate-200 px-2.5 md:px-3 py-2">
-                                                <Clock3 size={16} className="text-emerald-600" />
-
-                                                <div>
-                                                    <p className="text-[11px] uppercase text-slate-400 font-medium">
-                                                        Time
-                                                    </p>
-
-                                                    <p className="text-sm font-semibold text-slate-800">
-                                                        {booking.appointmentTime}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            {/* Serial no  */}
-                                            <div className="flex items-center gap-2 rounded-xl bg-amber-50 border border-amber-100 px-2.5 md:px-3 py-2">
-                                                <ShieldCheck size={16} className="text-amber-600" />
-
-                                                <div>
-                                                    <p className="text-[11px] uppercase text-amber-500 font-medium">
-                                                        Serial
-                                                    </p>
-
-                                                    <p className="text-sm font-bold text-amber-700">
-                                                        {booking.serial}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    {/* Patient Info */}
-                                    <div className="xl:w-[320px] rounded-2xl border border-slate-200
-                                     bg-slate-50/80 p-5">
-
-                                        <div className="flex items-center gap-2 mb-4">
-                                            <FaUser
-                                                size={30}
-                                                className="text-slate-500 border rounded p-1"
-                                            />
-
-                                            <h3 className="font-semibold text-slate-800">
-                                                Patient Information
-                                            </h3>
-                                        </div>
-
-                                        <div className="space-y-1 text-sm">
-
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-slate-400">
-                                                    Full Name
-                                                </span>
-
-                                                <span className="font-medium text-slate-800">
-                                                    {booking.patientName}
-                                                </span>
-                                            </div>
-
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-slate-400">
-                                                    Gender
-                                                </span>
-
-                                                <span className="font-medium text-slate-800">
-                                                    {booking.gender}
-                                                </span>
-                                            </div>
-
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-slate-400">
-                                                    Age
-                                                </span>
-
-                                                <span className="font-medium text-slate-800">
-                                                    {booking.age} yrs
-                                                </span>
-                                            </div>
-
-                                            <div className="flex items-center justify-between">
-                                                <span className="text-slate-400">
-                                                    Phone
-                                                </span>
-
-                                                <span className="font-medium text-slate-800">
-                                                    {booking.phone}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Location */}
-                                <div className="mt-5 rounded-2xl border border-slate-200 bg-linear-to-r from-slate-50 to-white p-3 md:p-5">
-
-                                    <div className="flex items-start gap-4">
-
-                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 shadow-sm animate-pulse">
-                                            <MapPin size={20} />
-                                        </div>
-
-                                        <div className="flex-1">
-                                            <div className="flex items-center justify-between flex-wrap gap-3">
-                                                <div>
-                                                    <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
-                                                        Hospital Location
-                                                    </p>
-
-                                                    <h4 className="text-base font-semibold text-slate-700 ">
-                                                        {booking.location}
-                                                    </h4>
-                                                </div>
-
-                                                <button className="cursor-pointer inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 transition">
-                                                    View Directions
-                                                    <ChevronRight size={16} />
-                                                </button>
-                                            </div>
-
-                                            <div className="flex flex-wrap gap-3 mt-2">
-
-                                                <span className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600">
-                                                    Floor: {booking.floorNo}
-                                                </span>
-
-                                                <span className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-600">
-                                                    Room: {booking.roomNo}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Footer */}
-                                <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-5">
-
-                                    <div className="hidden md:flex items-center gap-2 text-sm text-slate-500">
-                                        <Phone size={15} />
-                                        {booking.phone}
-                                    </div>
-
-                                    <div className="flex items-center gap-3">
-                                        {/* edit info modal  */}
-                                        <Modal>
-                                            <Button className="h-11 px-5 rounded-xl cursor-pointer border border-slate-200 bg-white text-slate-700 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 hover:shadow-sm transition-all active:scale-95">
-                                                <Pencil size={16} />
-                                                Edit Patient Info
-                                            </Button>
-
-                                            <Modal.Backdrop>
-                                                <Modal.Container placement="auto">
-                                                    <Modal.Dialog className="sm:max-w-md">
-                                                        <Modal.CloseTrigger />
-                                                        <Modal.Header>
-                                                            <Modal.Icon className="bg-accent-soft text-accent-soft-foreground">
-
-                                                            </Modal.Icon>
-                                                            <Modal.Heading>Contact Us</Modal.Heading>
-                                                            <p className="mt-1.5 text-sm leading-5 text-muted">
-                                                                Fill out the form below and we'll get back to you. The modal adapts automatically
-                                                                when the keyboard appears on mobile.
-                                                            </p>
-                                                        </Modal.Header>
-                                                        <Modal.Body className="p-6">
-                                                            <Surface variant="default">
-                                                                <form className="flex flex-col gap-4">
-                                                                    <TextField className="w-full" name="name" type="text">
-                                                                        <Label>Name</Label>
-                                                                        <Input placeholder="Enter your name" />
-                                                                    </TextField>
-                                                                    <TextField className="w-full" name="email" type="email">
-                                                                        <Label>Email</Label>
-                                                                        <Input placeholder="Enter your email" />
-                                                                    </TextField>
-                                                                    <TextField className="w-full" name="phone" type="tel">
-                                                                        <Label>Phone</Label>
-                                                                        <Input placeholder="Enter your phone number" />
-                                                                    </TextField>
-                                                                    <TextField className="w-full" name="company">
-                                                                        <Label>Company</Label>
-                                                                        <Input placeholder="Enter your company name" />
-                                                                    </TextField>
-                                                                    <TextField className="w-full" name="message">
-                                                                        <Label>Message</Label>
-                                                                        <Input placeholder="Enter your message" />
-                                                                    </TextField>
-                                                                </form>
-                                                            </Surface>
-                                                        </Modal.Body>
-                                                        <Modal.Footer>
-                                                            <Button slot="close" variant="secondary">
-                                                                Cancel
-                                                            </Button>
-                                                            <Button slot="close">Edit Save</Button>
-                                                        </Modal.Footer>
-                                                    </Modal.Dialog>
-                                                </Modal.Container>
-                                            </Modal.Backdrop>
-                                        </Modal>
-
-
-                                        {/* cancel Booking alert dialog  */}
-                                        <AlertDialog>
-                                            <Button className="h-11 px-5 rounded-xl cursor-pointer bg-red-50 text-red-600 text-sm font-semibold flex items-center gap-2 hover:bg-red-100 transition-all active:scale-95">
-                                                <Trash2 size={16} />
-                                                Cancel Booking
-                                            </Button>
-                                            <AlertDialog.Backdrop>
-                                                <AlertDialog.Container>
-                                                    <AlertDialog.Dialog className="sm:max-w-[400px]">
-                                                        <AlertDialog.CloseTrigger />
-                                                        <AlertDialog.Header>
-                                                            <AlertDialog.Icon status="danger" />
-                                                            <AlertDialog.Heading>Delete project permanently?</AlertDialog.Heading>
-                                                        </AlertDialog.Header>
-                                                        <AlertDialog.Body>
-                                                            <p>
-                                                                This will permanently delete <strong>My Awesome Project</strong> and all of its
-                                                                data. This action cannot be undone.
-                                                            </p>
-                                                        </AlertDialog.Body>
-                                                        <AlertDialog.Footer>
-                                                            <Button slot="close" variant="tertiary">
-                                                                Cancel
-                                                            </Button>
-                                                            <Button slot="close" variant="danger">
-                                                                You Sure Cancel Booking?
-                                                            </Button>
-                                                        </AlertDialog.Footer>
-                                                    </AlertDialog.Dialog>
-                                                </AlertDialog.Container>
-                                            </AlertDialog.Backdrop>
-                                        </AlertDialog>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                {/* switch btns for dashboard and profile  */}
+                <div>
+                    <SwitchBtnDashboardProfile switchBtn={switchBtn} setSwitchBtn={setSwitchBtn} />
                 </div>
+
+                <div className="mt-15 transition-all duration-300">
+                    {switchBtn === "dashboard" && (
+                        <AppointmentBookingCard />
+                    )}
+
+                    {switchBtn === "profile" && (
+                        <UserProfile />
+                    )}
+                </div>
+
             </div>
         </section>
     );
