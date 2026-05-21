@@ -14,24 +14,6 @@ export const postAppointmentData = async (formData) => {
   return data;
 };
 
-export const updateAppointmentData = async (id, formData) => {
-  const updateData = Object.fromEntries(formData.entries());
-
-  const res = await fetch(`http://localhost:8000/appointments/${id}`, {
-    method: "PATCH",
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify(updateData),
-  });
-
-  const data = await res.json();
-
-  return data;
-};
-
 export const deleteAppointment = async (id) => {
   const res = await fetch(`http://localhost:8000/appointments/${id}`, {
     method: "DELETE",
@@ -41,5 +23,19 @@ export const deleteAppointment = async (id) => {
     toast("Successfully Delete Appointment.");
     redirect("/appointments");
   }
+  return data;
+};
+
+export const editAppointment = async (updateData, id) => {
+  const res = await fetch(`http://localhost:8000/appointments/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateData),
+  });
+
+  const data = await res.json();
+
   return data;
 };

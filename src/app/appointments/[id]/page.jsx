@@ -471,7 +471,7 @@ const DoctorDetailPage = async ({ params }) => {
                     {/* Appointment Modal */}
                   <div className='flex justify-center mt-5'>
 
-                      <AppointmentModal doctorName={name} specialist={specialist} hospital={hospital} location={location} image={image} />
+                      <AppointmentModal doctorDetails ={doctorDetails} />
                   </div>
 
                 </div>

@@ -29,8 +29,8 @@ import {
 } from "@heroui/react";
 
 import { getAppointmentPatientData } from "@/lib/Data";
-import AppointmentModal from "./share/AppointmentModal";
 import { deleteAppointment } from "@/lib/Action";
+import AppointmentEditModal from "./share/AppointmentEditModal";
 
 const AppointmentBookingCard = () => {
   const [appointmentData, setAppointmentData] = useState([]);
@@ -100,7 +100,7 @@ const AppointmentBookingCard = () => {
 
                           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 text-xs font-semibold border border-emerald-100">
                             <BadgeCheck size={13} />
-                            {booking.status}
+                            Upcoming
                           </span>
                         </div>
 
@@ -262,61 +262,8 @@ const AppointmentBookingCard = () => {
 
                   <div className="flex items-center gap-3">
                     {/* Edit Modal */}
-                    <Modal>
-                      <Button className="h-11 px-5 rounded-xl cursor-pointer border border-slate-200 bg-white text-slate-700 text-sm font-semibold flex items-center gap-2 hover:bg-slate-50 hover:shadow-sm transition-all active:scale-95">
-                        <Pencil size={16} />
-                        Edit Patient Info
-                      </Button>
 
-                      <Modal.Backdrop>
-                        <Modal.Container placement="auto">
-                          <Modal.Dialog className="sm:max-w-md">
-                            <Modal.CloseTrigger />
-
-                            <Modal.Header>
-                              <Modal.Heading>
-                                Edit Patient Information
-                              </Modal.Heading>
-                            </Modal.Header>
-
-                            <Modal.Body className="p-6">
-                              <Surface variant="default">
-                                <form className="flex flex-col gap-4">
-                                  <TextField
-                                    className="w-full"
-                                    name="name"
-                                    type="text"
-                                  >
-                                    <Label>Name</Label>
-
-                                    <Input defaultValue={booking.patientName} />
-                                  </TextField>
-
-                                  <TextField
-                                    className="w-full"
-                                    name="phone"
-                                    type="tel"
-                                  >
-                                    <Label>Phone</Label>
-
-                                    <Input defaultValue={booking.phone} />
-                                  </TextField>
-                                </form>
-                              </Surface>
-                            </Modal.Body>
-
-                            <Modal.Footer>
-                              <Button slot="close" variant="secondary">
-                                Cancel
-                              </Button>
-
-                              <Button slot="close">Save Changes</Button>
-                            </Modal.Footer>
-                          </Modal.Dialog>
-                        </Modal.Container>
-                      </Modal.Backdrop>
-                    </Modal>
-                    <AppointmentModal />
+                    <AppointmentEditModal booking={booking} />
 
                     {/*delete Booking */}
                     <AlertDialog>
