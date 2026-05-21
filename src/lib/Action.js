@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const postAppointmentData = async (formData) => {
   const res = await fetch("http://localhost:8000/appointments", {
@@ -37,6 +38,7 @@ export const deleteAppointment = async (id) => {
   });
   const data = res.json();
   if (data) {
+    toast("Successfully Delete Appointment.");
     redirect("/appointments");
   }
   return data;

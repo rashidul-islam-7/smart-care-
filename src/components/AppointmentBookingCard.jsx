@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import Image from "next/image";
@@ -32,6 +30,7 @@ import {
 
 import { getAppointmentPatientData } from "@/lib/Data";
 import AppointmentModal from "./share/AppointmentModal";
+import { deleteAppointment } from "@/lib/Action";
 
 const AppointmentBookingCard = () => {
   const [appointmentData, setAppointmentData] = useState([]);
@@ -51,6 +50,10 @@ const AppointmentBookingCard = () => {
 
     fetchAppointmentData();
   }, []);
+
+  const deleteHandler = async (id) => {
+    return await deleteAppointment(id);
+  };
 
   // loading state
   if (loading) {
@@ -315,7 +318,7 @@ const AppointmentBookingCard = () => {
                     </Modal>
                     <AppointmentModal />
 
-                    {/* Cancel Booking */}
+                    {/*delete Booking */}
                     <AlertDialog>
                       <Button className="h-11 px-5 rounded-xl cursor-pointer bg-red-50 text-red-600 text-sm font-semibold flex items-center gap-2 hover:bg-red-100 transition-all active:scale-95">
                         <Trash2 size={16} />
@@ -347,7 +350,11 @@ const AppointmentBookingCard = () => {
                                 No
                               </Button>
 
-                              <Button slot="close" variant="danger">
+                              <Button
+                                onClick={() => deleteHandler(booking._id)}
+                                slot="close"
+                                variant="danger"
+                              >
                                 Yes Cancel
                               </Button>
                             </AlertDialog.Footer>
