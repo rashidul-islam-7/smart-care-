@@ -20,3 +20,6 @@ function HomePage() {
 }
 
 export default HomePage;
+
+
+// /app/api/auth/[...all]/route.ts

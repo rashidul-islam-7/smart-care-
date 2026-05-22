@@ -5,7 +5,7 @@ import { ShieldCheck } from 'lucide-react';
 
 const AppointmentPageHero = () => {
     return (
-        <section className=" px-5 md:px-10  pt-10 pb-15 md:py-15 relative overflow-hidden  bg-linear-to-r from-sky-50 via-white to-green-50  
+        <section className=" px-5 md:px-10 py-8 md:py-15 relative overflow-hidden  bg-linear-to-r from-sky-50 via-white to-green-50  
          ">
 
             {/* Background Blur */}
@@ -36,7 +36,8 @@ const AppointmentPageHero = () => {
                 </h1>
 
                 {/* Sub Text */}
-                <p className="mt-3 text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto">
+                <p className="mt-3 text-gray-500 text-lg leading-relaxed 
+                max-w-2xl mx-auto">
                     Discover qualified doctors across multiple specialties,
                     compare schedules, and book your consultation quickly
                     and securely.

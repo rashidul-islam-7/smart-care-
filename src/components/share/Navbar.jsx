@@ -4,10 +4,21 @@ import React from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import Logo from "../ui/Logo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "@/lib/auth-client";
+import { Router } from "next/router";
 
 const Navbar = () => {
   const pathname = usePathname();
+      const router = useRouter();
+
+  const { data, isPending } = useSession();
+  const user = data?.user;
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/login");
+  };
 
   const navLinks = (
     <ul className="menu menu-horizontal gap-2 px-1">
@@ -43,9 +54,9 @@ const Navbar = () => {
   return (
     <header
       className="sticky top-0 z-50 backdrop-blur-md
-         bg-white/80 border-b border-gray-100"
+         bg-white/60 border-b border-gray-100"
     >
-      <div className="navbar max-w-7xl mx-auto px-4 md:px-10 py-2">
+      <div className="navbar max-w-7xl mx-auto px-4 md:px-20 py-1">
         {/* Left Side */}
         <div className="navbar-start">
           {/* Mobile Menu */}
@@ -54,13 +65,13 @@ const Navbar = () => {
               <Menu className="w-6 h-6" />
             </label>
 
-            <ul
+            <nav
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-xl
                              bg-white rounded-2xl w-56 border border-gray-100 space-y-2"
             >
               {navLinks}
-            </ul>
+            </nav>
           </div>
 
           {/* Logo */}
@@ -71,30 +82,62 @@ const Navbar = () => {
 
         {/* Center Menu */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal gap-3 text-[15px] font-medium text-gray-700">
+          <nav className="menu menu-horizontal gap-3 text-[15px] font-medium text-gray-700">
             {navLinks}
-          </ul>
+          </nav>
         </div>
 
         {/* Right Side */}
         <div className="navbar-end">
-          <div className="flex items-center gap-3">
-            {/* Login */}
-            <Link
-              href="/login"
-              className="px-5 py-1 rounded-sm border border-green-500 text-green-700 font-medium hover:bg-green-50 text-base hover:shadow-lg transition-all duration-300"
-            >
-              Log In
-            </Link>
+          {isPending ? (
+            <span className="loading loading-spinner loading-md"></span>
+          ) : user ? (
+            <div className="flex items-center gap-3">
+              {/* Avatar */}
+              <Link
+                href={"/dashboard"}
+                className="flex justify-center items-center gap-2 "
+              >
+                <p className=" uppercase text-sm">{user.name}</p>
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border">
+                  <img
+                    src={user.image || "/user-img.png"}
+                    alt={user.name || "user"}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </Link>
 
-            {/* Signup */}
-            <Link
-              href="/signup"
-              className="hidden md:flex px-5 py-1 rounded-sm bg-linear-to-r from-[#032744] to-sky-400 text-white font-semibold text-base  hover:shadow-lg transition-all duration-300"
-            >
-              Sign Up
-            </Link>
-          </div>
+              {/* Logout */}
+              <button
+                onClick={handleLogout}
+                className="text-[16px] cursor-pointer hover:text-teal-500  border py-1 px-2 rounded-sm border-teal-600 "
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <div className="navbar-end">
+              <div className="flex items-center gap-3">
+                {/* Login */}
+                <Link
+                  href="/login"
+                  className="px-5 py-1 rounded-sm border border-green-500 text-green-700 font-medium hover:bg-green-50 text-base hover:shadow-lg transition-all duration-300"
+                >
+                  Log In
+                </Link>
+
+                {/* Signup */}
+                <Link
+                  href="/signup"
+                  className="hidden md:flex px-5 py-1 rounded-sm bg-linear-to-r from-[#032744] to-sky-400 text-white font-semibold text-base  hover:shadow-lg transition-all duration-300"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </header>

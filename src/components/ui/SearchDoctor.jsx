@@ -13,7 +13,7 @@ const SearchDoctor = ({ doctorsData }) => {
 
   return (
     <div>
-      <div className="flex justify-center mb-20">
+      <div className="flex justify-center mb-15 lg:mb-20">
         <div className=" shadow-xl flex items-center gap-2 border border-green-100 rounded-xl px-3 w-full md:w-[500px] bg-white">
           {/* Search Icon */}
           <Search size={22} className="text-gray-400 flex-shrink-0" />

@@ -4,15 +4,20 @@ import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 
 const TopDoctors = async () => {
-  const doctor = await getDoctors();
+  let doctorList = [];
 
-  const doctorList = doctor || [];
+  try {
+    const doctor = await getDoctors();
 
-  const topThreeDoctors = [...doctorList]
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    doctorList = Array.isArray(doctor) ? doctor : [];
+  } catch (error) {
+    console.log(error);
+    doctorList = [];
+  }
+
+  const topThreeDoctors = doctorList
+    .sort((a, b) => b.rating - a.rating)
     .slice(0, 3);
-
-  console.log(topThreeDoctors);
 
   if (topThreeDoctors.length === 0) {
     return (

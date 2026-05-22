@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const DoctorCard = ({ doctor }) => {
 
-    const { _id, name, specialist, degrees, image, experience, availabilityDays, availabilityTimes, description, hospital, location, rating } = doctor;
+    const { _id, name, specialist, image, experience, availabilityDays, hospital, location, rating } = doctor;
 
     return (
         <div className="relative overflow-hidden rounded-xl bg-white shadow-sm ">
@@ -15,8 +15,8 @@ const DoctorCard = ({ doctor }) => {
             <div className="relative group ">
 
                 {/* Rating */}
-                <div className="bg-green-300/20 px-2 rounded-full z-10 absolute top-4 right-4 flex items-center gap-1 text-yellow-500">
-                    <span className="font-semibold text-gray-200 text-sm">
+                <div className="bg-green-300/40 px-2 rounded-full z-10 absolute top-4 right-4 flex items-center gap-1 text-yellow-500">
+                    <span className="font-semibold text-gray-600 text-sm">
                         {rating}
                     </span>
                     <Star size={14} fill="currentColor" />
@@ -24,7 +24,7 @@ const DoctorCard = ({ doctor }) => {
 
                 <div className="relative h-52 overflow-hidden">
                     <Image
-                        src={image}
+                        src={image || "/doctor-avatar.png"}
                         alt="Doctor"
                         fill
                         className="object-center group-hover:scale-105 flex justify-center items-center transition-transform duration-500"
@@ -50,14 +50,14 @@ const DoctorCard = ({ doctor }) => {
                     <h2 className="text-2xl font-bold text-gray-700">
                         {name}
                     </h2>
-                    <p className="flex items-center gap-1 w-fit px-3 py-1 mt-2 text-xs rounded-full bg-sky-100 text-sky-600 font-medium">
+                    <p className="flex items-center gap-1 w-fit px-3 py-1 mt-2 text-xs rounded-full bg-sky-100 text-sky-600 font-medium line-clamp-1">
                         <Stethoscope size={14} />
                         {specialist}
                     </p>
                 </div>
 
                 {/* Date & Time */}
-                <div className="space-y-1 text-sm text-gray-500">
+                <div className="space-y-1 text-sm text-gray-500 line-clamp-1">
 
                     <div className="flex items-center gap-2">
                         <CalendarDays size={18} className="text-green-600" />Every
