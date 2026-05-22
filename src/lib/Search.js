@@ -1,4 +1,5 @@
 export const findDoctors = (doctorsData, searchDoc) => {
+
   if (!doctorsData) return doctorsData;
 
   const text = searchDoc.toLowerCase();

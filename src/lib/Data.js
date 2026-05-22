@@ -1,5 +1,4 @@
 export const getDoctors = async () => {
-  // "use server";
   const res = await fetch("http://localhost:8000/doctors");
   const data = await res.json();
   return data;

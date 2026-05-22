@@ -253,7 +253,7 @@ const AppointmentBookingCard = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="mt-5 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-5">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-5">
                   <div className="hidden md:flex items-center gap-2 text-sm text-slate-500">
                     <Phone size={15} />
 
@@ -262,7 +262,6 @@ const AppointmentBookingCard = () => {
 
                   <div className="flex items-center gap-3">
                     {/* Edit Modal */}
-
                     <AppointmentEditModal booking={booking} />
 
                     {/*delete Booking */}
