@@ -7,10 +7,11 @@ import Logo from "../ui/Logo";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "@/lib/auth-client";
 import { Router } from "next/router";
+import { Avatar } from "@heroui/react";
 
 const Navbar = () => {
   const pathname = usePathname();
-      const router = useRouter();
+  const router = useRouter();
 
   const { data, isPending } = useSession();
   const user = data?.user;
@@ -99,13 +100,15 @@ const Navbar = () => {
                 className="flex justify-center items-center gap-2 "
               >
                 <p className=" uppercase text-sm">{user.name}</p>
-                <div className="relative w-9 h-9 rounded-full overflow-hidden border">
-                  <img
-                    src={user.image || "/user-img.png"}
-                    alt={user.name || "user"}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="border border-green-300 rounded-full">
+                  <Avatar>
+                    <Avatar.Image
+                      referrerPolicy="no-referrer"
+                      alt={user.name || user}
+                      src={user.image}
+                    />
+                    <Avatar.Fallback>{user.name.charAt(2)}</Avatar.Fallback>
+                  </Avatar>
                 </div>
               </Link>
 
@@ -114,7 +117,7 @@ const Navbar = () => {
                 onClick={handleLogout}
                 className="text-[16px] cursor-pointer hover:text-teal-500  border py-1 px-2 rounded-sm border-teal-600 "
               >
-                Sign out
+                Logout
               </button>
             </div>
           ) : (

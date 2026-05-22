@@ -1,192 +1,166 @@
-
-import React from 'react';
-import DoctorDetailHeroSection from '@/components/ui/DoctorDetailHero';
-import Image from 'next/image';
+import React from "react";
+import DoctorDetailHeroSection from "@/components/ui/DoctorDetailHero";
+import Image from "next/image";
 import {
-    FaArrowRight,
-    FaCalendarCheck,
-    FaLocationDot,
-    FaMoneyCheck,
-    FaStar
-} from 'react-icons/fa6';
+  FaArrowRight,
+  FaCalendarCheck,
+  FaLocationDot,
+  FaMoneyCheck,
+  FaStar,
+} from "react-icons/fa6";
 
 import {
-    Card,
-    FieldError,
-    Input,
-    Label,
-    Modal,
-    Radio,
-    RadioGroup,
-    Surface,
-    TextField,
-    Form,
-} from '@heroui/react';
+  Card,
+  FieldError,
+  Input,
+  Label,
+  Modal,
+  Radio,
+  RadioGroup,
+  Surface,
+  TextField,
+  Form,
+} from "@heroui/react";
 
-import { getDoctorId } from '@/lib/Data';
-import AppointmentModal from '@/components/share/AppointmentModal';
+import { getDoctorId } from "@/lib/Data";
+import AppointmentModal from "@/components/share/AppointmentModal";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const DoctorDetailPage = async ({ params }) => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-    const { id } = await params;
-    const doctorDetails = await getDoctorId(id);
-    const {
-        name,
-        specialist,
-        fee,
-        image,
-        experience,
-        availabilityDays,
-        availabilityTimes,
-        description,
-        hospital,
-        location,
-        rating
-    } = doctorDetails;
+  const user = session?.user;
+  if (!user) {
+    redirect("/login");
+    return;
+  }
 
+  const { id } = await params;
+  const doctorDetails = await getDoctorId(id);
+  const {
+    name,
+    specialist,
+    fee,
+    image,
+    experience,
+    availabilityDays,
+    availabilityTimes,
+    description,
+    hospital,
+    location,
+    rating,
+  } = doctorDetails;
 
-    return (
-        <div>
-            <DoctorDetailHeroSection />
-            <section className="max-w-5xl mx-auto px-5 py-10">
-                {/* Title */}
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 border-b pb-3 border-gray-200">
-                    Doctor Details
-                </h1>
+  return (
+    <div>
+      <DoctorDetailHeroSection />
+      <section className="max-w-5xl mx-auto px-5 py-10">
+        {/* Title */}
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 border-b pb-3 border-gray-200">
+          Doctor Details
+        </h1>
 
-                {/* Main Card */}
-                <div className="mt-8 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10">
+        {/* Main Card */}
+        <div className="mt-8 bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10">
+          {/* Doctor Info */}
+          <div className="text-center">
+            <div className="relative w-40 h-40 mx-auto rounded-xl overflow-hidden border-4 border-sky-100 shadow-lg shadow-sky-100">
+              <Image src={image} alt={name} fill className="object-cover" />
+            </div>
 
-                    {/* Doctor Info */}
-                    <div className="text-center">
+            <h3 className="mt-4 text-2xl font-semibold text-gray-800">
+              {name}
+            </h3>
 
-                        <div className="relative w-40 h-40 mx-auto rounded-xl overflow-hidden border-4 border-sky-100 shadow-lg shadow-sky-100">
+            <p className="text-sky-600 font-medium">{specialist}</p>
 
-                            <Image
-                                src={image}
-                                alt={name}
-                                fill
-                                className="object-cover"
-                            />
+            <p className="text-gray-500 text-sm mt-1">
+              {hospital}, {location}
+            </p>
+          </div>
 
-                        </div>
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-center">
+            <div className="p-4 rounded-xl bg-sky-50 border border-sky-100">
+              <h2 className="text-xl font-bold text-gray-800">
+                {experience}+ Years
+              </h2>
 
-                        <h3 className="mt-4 text-2xl font-semibold text-gray-800">
-                            {name}
-                        </h3>
+              <p className="text-gray-500 text-sm uppercase">Experience</p>
+            </div>
 
-                        <p className="text-sky-600 font-medium">
-                            {specialist}
-                        </p>
+            <div className="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+              <h2 className="text-xl flex justify-center items-center gap-1 font-bold text-gray-800">
+                {rating}
 
-                        <p className="text-gray-500 text-sm mt-1">
-                            {hospital}, {location}
-                        </p>
+                <FaStar className="text-yellow-500" size={18} />
+              </h2>
 
-                    </div>
+              <p className="text-gray-500 text-sm uppercase">Rating</p>
+            </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-center">
+            <div className="p-4 rounded-xl bg-green-50 border border-green-100">
+              <h2 className="text-xl font-bold text-gray-800">18</h2>
+              <p className="text-gray-500 text-sm uppercase">
+                Current Booking Patient
+              </p>
+            </div>
+          </div>
 
-                        <div className="p-4 rounded-xl bg-sky-50 border border-sky-100">
-                            <h2 className="text-xl font-bold text-gray-800">
-                                {experience}+ Years
-                            </h2>
+          {/* Info Section */}
+          <div className="mt-8 space-y-4 max-w-2xl mx-auto">
+            {/* Location */}
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
+              <FaLocationDot className="text-green-600 mt-1" />
+              <div>
+                <p className="font-semibold text-gray-700">Location</p>
+                <p className="text-gray-500">
+                  {hospital}, {location}
+                </p>
+              </div>
+            </div>
 
-                            <p className="text-gray-500 text-sm uppercase">
-                                Experience
-                            </p>
-                        </div>
+            {/* Availability */}
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
+              <FaCalendarCheck className="text-green-600 mt-1" />
+              <div>
+                <p className="font-semibold text-gray-700">Availability</p>
+                <p className="text-gray-500">
+                  Every {availabilityDays.join(" , ")} - {availabilityTimes}
+                </p>
+              </div>
+            </div>
 
-                        <div className="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+            {/* Fee */}
+            <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
+              <FaMoneyCheck className="text-green-600 mt-1" />
+              <div>
+                <p className="font-semibold text-gray-700">Consultation Fee</p>
+                <p className="text-gray-500">{fee} BDT</p>
+              </div>
+            </div>
+          </div>
 
-                            <h2 className="text-xl flex justify-center items-center gap-1 font-bold text-gray-800">
-                                {rating}
+          {/* Description */}
+          <div className="mt-8 max-w-2xl mx-auto text-center">
+            <h4 className="text-lg font-semibold text-gray-700 mb-2">
+              About Doctor
+            </h4>
+            <p className="text-gray-500 leading-relaxed">{description}</p>
+          </div>
 
-                                <FaStar
-                                    className="text-yellow-500"
-                                    size={18}
-                                />
-                            </h2>
-
-                            <p className="text-gray-500 text-sm uppercase">
-                                Rating
-                            </p>
-
-                        </div>
-
-                        <div className="p-4 rounded-xl bg-green-50 border border-green-100">
-                            <h2 className="text-xl font-bold text-gray-800">
-                                18
-                            </h2>
-                            <p className="text-gray-500 text-sm uppercase">
-                                Current Booking Patient
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Info Section */}
-                    <div className="mt-8 space-y-4 max-w-2xl mx-auto">
-                        {/* Location */}
-                        <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
-                            <FaLocationDot className="text-green-600 mt-1" />
-                            <div>
-                                <p className="font-semibold text-gray-700">
-                                    Location
-                                </p>
-                                <p className="text-gray-500">
-                                    {hospital}, {location}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Availability */}
-                        <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
-                            <FaCalendarCheck className="text-green-600 mt-1" />
-                            <div>
-                                <p className="font-semibold text-gray-700">
-                                    Availability
-                                </p>
-                                <p className="text-gray-500">
-                                    Every {availabilityDays.join(' , ')} - {availabilityTimes}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Fee */}
-                        <div className="flex items-start gap-3 p-4 rounded-xl bg-gray-50">
-                            <FaMoneyCheck className="text-green-600 mt-1" />
-                            <div>
-                                <p className="font-semibold text-gray-700">
-                                    Consultation Fee
-                                </p>
-                                <p className="text-gray-500">
-                                    {fee} BDT
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Description */}
-                    <div className="mt-8 max-w-2xl mx-auto text-center">
-                        <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                            About Doctor
-                        </h4>
-                        <p className="text-gray-500 leading-relaxed">
-                            {description}
-                        </p>
-                    </div>
-
-                    {/* Appointment Modal */}
-                  <div className='flex justify-center mt-5'>
-
-                      <AppointmentModal doctorDetails ={doctorDetails} />
-                  </div>
-
-                </div>
-            </section>
+          {/* Appointment Modal */}
+          <div className="flex justify-center mt-5">
+            <AppointmentModal doctorDetails={doctorDetails} />
+          </div>
         </div>
-    );
+      </section>
+    </div>
+  );
 };
 
 export default DoctorDetailPage;

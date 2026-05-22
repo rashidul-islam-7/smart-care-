@@ -315,7 +315,7 @@ const AppointmentBookingCard = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20">
+        <div className="text-center py-5  ">
           <h2 className="text-2xl font-bold text-slate-700">
             No Appointments Found
           </h2>
