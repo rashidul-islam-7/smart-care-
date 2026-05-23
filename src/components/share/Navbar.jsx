@@ -55,15 +55,15 @@ const Navbar = () => {
   return (
     <header
       className="sticky top-0 z-50 backdrop-blur-md
-         bg-white/60 border-b border-gray-100"
+         bg-white/80 border-b border-gray-100"
     >
-      <div className="navbar max-w-7xl mx-auto px-4 md:px-20 py-1">
+      <div className="navbar max-w-7xl mx-auto px-2 md:px-20 py-1">
         {/* Left Side */}
         <div className="navbar-start">
           {/* Mobile Menu */}
-          <div className="dropdown lg:hidden">
+          <div className="dropdown lg:hidden -ml-3">
             <label tabIndex={0} className="btn btn-ghost rounded-full">
-              <Menu className="w-6 h-6" />
+              <Menu className="w-6 h-6 mr-2" />
             </label>
 
             <nav
@@ -99,7 +99,7 @@ const Navbar = () => {
                 href={"/dashboard"}
                 className="flex justify-center items-center gap-2 "
               >
-                <p className=" uppercase text-sm">{user.name}</p>
+                <p className=" hidden md:inline-block uppercase text-sm">{user.name}</p>
                 <div className="border border-green-300 rounded-full">
                   <Avatar>
                     <Avatar.Image
@@ -107,7 +107,7 @@ const Navbar = () => {
                       alt={user.name || user}
                       src={user.image}
                     />
-                    <Avatar.Fallback>{user.name.charAt(2)}</Avatar.Fallback>
+                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
                   </Avatar>
                 </div>
               </Link>

@@ -60,7 +60,7 @@ const SignUpClient = () => {
   return (
     <div>
       {/* form */}
-      <form onSubmit={onSubmit} className="flex w-96 flex-col gap-4">
+      <form onSubmit={onSubmit} className="flex w-auto flex-col gap-4">
         {/* name */}
         <TextField isRequired name="name" type="text">
           <Label>Username</Label>

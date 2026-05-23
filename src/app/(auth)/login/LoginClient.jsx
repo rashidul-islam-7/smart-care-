@@ -62,7 +62,7 @@ const LoginClient = () => {
 
   return (
     <div>
-      <form className="flex w-96 flex-col gap-4" onSubmit={onSubmit}>
+      <form className="flex w-auto flex-col gap-4" onSubmit={onSubmit}>
         {/* email */}
         <TextField
           isRequired
