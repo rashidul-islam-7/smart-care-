@@ -15,46 +15,32 @@ import {
 } from "@heroui/react";
 
 import { FaArrowRight } from "react-icons/fa6";
-
 import { postAppointmentData } from "@/lib/Action";
-
 import { TiArrowSync } from "react-icons/ti";
-
 import { toast } from "react-toastify";
-
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const AppointmentModal = ({ doctorDetails }) => {
   const [formErrors, setFormErrors] = useState({});
-
   const [isPending, setIsPending] = useState(false);
 
   const router = useRouter();
 
-  const {
-    name,
-    specialist,
-    fee,
-    image,
-    experience,
-    availabilityDays,
-    availabilityTimes,
-    description,
-    hospital,
-    location,
-    rating,
-  } = doctorDetails;
+  // session
+  const { data: session, isPending: sessionLoading } = authClient.useSession();
+
+  const { name, specialist, fee, image, hospital, location, rating } =
+    doctorDetails;
 
   // submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-
     const patientData = Object.fromEntries(formData.entries());
 
     const { patientName, phone, date, age } = patientData;
-
     let errors = {};
 
     // name validation
@@ -76,9 +62,7 @@ const AppointmentModal = ({ doctorDetails }) => {
       errors.date = "Appointment date is required";
     } else {
       const today = new Date();
-
       today.setHours(0, 0, 0, 0);
-
       if (new Date(date) < today) {
         errors.date = "Past date not allowed";
       }
@@ -94,45 +78,41 @@ const AppointmentModal = ({ doctorDetails }) => {
     // stop if errors
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
-
       return;
     }
 
     setFormErrors({});
-
     setIsPending(true);
 
     try {
       // final appointment data
       const appointmentData = {
         ...patientData,
-
         specialist,
-
         hospital,
-
         location,
-
         fee,
-
         rating,
-
         doctor: {
           name,
-
           image,
+        },
+        user: {
+          userId: session.user?.id,
+          name: session.user?.name,
+          email: session.user?.email,
+          image: session.user?.image,
         },
       };
 
-      const result = await postAppointmentData(appointmentData);
+      const { data: tokenData } = await authClient.token();
+      
+      const result = await postAppointmentData(appointmentData, tokenData);
 
       if (result.insertedId) {
-        toast.success("Your Appointment was successful!");
-
+        toast.success("Your Appointment is successful!");
         e.target.reset();
-
         router.push("/dashboard");
-
         router.refresh();
       }
     } catch (error) {
@@ -143,6 +123,15 @@ const AppointmentModal = ({ doctorDetails }) => {
       setIsPending(false);
     }
   };
+
+  // loading screen while checking session
+  if (sessionLoading) {
+    return (
+      <div className="flex justify-center items-center py-10">
+        <TiArrowSync className="animate-spin text-4xl text-sky-500" />
+      </div>
+    );
+  }
 
   return (
     <Modal>
@@ -334,6 +323,7 @@ const AppointmentModal = ({ doctorDetails }) => {
                         variant="primary"
                         type="submit"
                         isPending={isPending}
+                        disabled={!session}
                       >
                         {isPending ? (
                           <>

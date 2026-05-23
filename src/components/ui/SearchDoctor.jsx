@@ -9,7 +9,7 @@ const SearchDoctor = ({ doctorsData }) => {
   const [searchDoc, setSearchDoc] = useState("");
 
   const searchedDoctors = findDoctors(doctorsData, searchDoc);
-  console.log(searchedDoctors);
+
 
   return (
     <div>

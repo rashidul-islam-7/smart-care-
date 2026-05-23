@@ -18,6 +18,7 @@ import { useRouter } from "next/navigation";
 import { TiArrowSync } from "react-icons/ti";
 import { FaEdit } from "react-icons/fa";
 import { editAppointment } from "@/lib/Action";
+import { authClient } from "@/lib/auth-client";
 
 const AppointmentEditModal = ({ booking }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,17 +97,21 @@ const AppointmentEditModal = ({ booking }) => {
 
     setFormErrors({});
     setIsPending(true);
+    const { data: tokenData } = await authClient.token();
 
     try {
-      const result = await editAppointment(formDataState, booking._id);
+      const result = await editAppointment(
+        formDataState,
+        booking._id,
+        tokenData,
+      );
 
       if (result.modifiedCount > 0) {
         toast.success("Appointment Updated Successfully!");
         setIsOpen(false);
-
         router.refresh();
       } else {
-        toast.error("No changes made");
+        toast.error("No changes Appointment!");
         setIsOpen(false);
       }
     } catch (error) {

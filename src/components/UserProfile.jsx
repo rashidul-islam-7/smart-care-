@@ -1,44 +1,33 @@
-import React from "react";
+export const metadata = {
+  title: "Profile | smartCare+",
+};
 
-import user from "@/assets/Doctors/dr_tanvir.jpg";
-import Image from "next/image";
-import { useSession } from "@/lib/auth-client";
+import { Avatar } from "@heroui/react";
+import ProfileUpdateModal from "./ProfileUpdateModal";
 
-const UserProfile = () => {
-  const { data, isPending } = useSession();
-  const user = data?.user;
+const UserProfile = ({ userInfo }) => {
+  const user = userInfo?.user;
+  const { name, image, email } = user;
+  console.log(userInfo);
 
   return (
     <div className="pb-20">
-      {isPending ? (
-        <span className="loading loading-spinner loading-lg"></span>
-      ) : (
-        <div className="border-l-4 border-l-blue-800 max-w-lg mx-auto shadow rounded-2xl p-5 bg-linear-to-tl from-blue-200/20  to-transparent">
-          <div className="flex items-center gap-3 ">
-            <div className="h-24 w-24 flex justify-center items-center border-2 border-gray-400 rounded-full drop-shadow ">
-              <img
-                src={user?.image || "/user-img.png"}
-                alt={user?.name}
-                fill
-                className="rounded-full"
-              />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold uppercase">{user.name}</h3>
-              <p>{user?.email}</p>
-            </div>
-          </div>
-          {/* buttons  */}
-          <div className="text-right">
-            <button
-              className="cursor-pointer py-1 px-3 rounded-xl bg-white 
-          border border-gray-300 hover:border-blue-400 hover:text-blue-600 duration-300 transition-all text-gray-500"
-            >
-              Edit Profile
-            </button>
+      <div className="border-l-4 border-l-blue-800 max-w-lg mx-auto shadow rounded-2xl p-5 bg-linear-to-tl from-blue-200/20  to-transparent">
+        <div className="flex items-center gap-4">
+          <Avatar className="size-20 rounded-full">
+            <Avatar.Image alt={name || "User"} src={image || "/user-img.png"} />
+            <Avatar.Fallback>{name ? name.charAt(0) : "U"}</Avatar.Fallback>
+          </Avatar>
+          <div>
+            <h3 className="text-lg font-semibold uppercase">{name}</h3>
+            <p>{email}</p>
           </div>
         </div>
-      )}
+        {/* buttons */}
+        <div className="text-right">
+          <ProfileUpdateModal userInfo={userInfo} />
+        </div>
+      </div>
     </div>
   );
 };

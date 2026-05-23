@@ -1,14 +1,15 @@
-"use client";
+export const metadata = {
+  title: "Dashboard | SmartCare+",
+  description:
+    " Manage Profile, appointments, doctors, and healthcare services easily with SmartCare+.",
+};
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-
 import {
   CalendarDays,
   Clock3,
   MapPin,
   Phone,
-  Pencil,
   Trash2,
   Stethoscope,
   ShieldCheck,
@@ -17,52 +18,24 @@ import {
 } from "lucide-react";
 
 import { FaUser } from "react-icons/fa6";
-
-import {
-  AlertDialog,
-  Button,
-  Input,
-  Label,
-  Modal,
-  Surface,
-  TextField,
-} from "@heroui/react";
-
-import { getAppointmentPatientData } from "@/lib/Data";
+import { AlertDialog, Button } from "@heroui/react";
 import { deleteAppointment } from "@/lib/Action";
 import AppointmentEditModal from "./share/AppointmentEditModal";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
-const AppointmentBookingCard = () => {
-  const [appointmentData, setAppointmentData] = useState([]);
-  const [loading, setLoading] = useState(true);
+const AppointmentBookingCard = ({ userInfo, appointmentList }) => {
+  const router = useRouter();
 
-  useEffect(() => {
-    const fetchAppointmentData = async () => {
-      try {
-        const data = await getAppointmentPatientData();
-        setAppointmentData(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const appointmentData = appointmentList;
 
-    fetchAppointmentData();
-  }, []);
-
+  // delete data
   const deleteHandler = async (id) => {
-    return await deleteAppointment(id);
-  };
+  const { data: tokenData } = await authClient.token();
 
-  // loading state
-  if (loading) {
-    return (
-      <div className="text-center py-20 text-lg font-medium text-slate-500">
-        <span className="loading loading-spinner loading-md"></span>
-      </div>
-    );
-  }
+    await deleteAppointment(id, tokenData);
+    router.refresh();
+  };
 
   return (
     <div>

@@ -7,7 +7,7 @@ import SwitchBtnDashboardProfile from "@/components/ui/SwitchBtn";
 import AppointmentBookingCard from "@/components/AppointmentBookingCard";
 import UserProfile from "@/components/UserProfile";
 
-const DashboardClient = ({ user }) => {
+const DashboardClient = ({ user, appointmentList }) => {
   const [switchBtn, setSwitchBtn] = useState("dashboard");
 
   return (
@@ -47,9 +47,14 @@ const DashboardClient = ({ user }) => {
         </div>
 
         <div className="mt-15 transition-all duration-300">
-          {switchBtn === "dashboard" && <AppointmentBookingCard />}
+          {switchBtn === "dashboard" && (
+            <AppointmentBookingCard
+              userInfo={user}
+              appointmentList={appointmentList}
+            />
+          )}
 
-          {switchBtn === "profile" && <UserProfile />}
+          {switchBtn === "profile" && <UserProfile userInfo={user} />}
         </div>
       </div>
     </section>

@@ -11,7 +11,7 @@ const TopDoctors = async () => {
 
     doctorList = Array.isArray(doctor) ? doctor : [];
   } catch (error) {
-    console.log(error);
+    console.error("Failed to fetch doctors:", error);
     doctorList = [];
   }
 
@@ -21,8 +21,13 @@ const TopDoctors = async () => {
 
   if (topThreeDoctors.length === 0) {
     return (
-      <section className="py-16 text-center text-slate-500">
-        <p>No top doctors available at the moment.</p>
+      <section className="py-16 text-center bg-gray-50 shadow w-fit px-10 rounded-2xl m-auto mt-10">
+        <p className="text-lg font-medium text-slate-600">
+          Top doctors not found
+        </p>
+        <p className="text-sm text-slate-400 mt-2">
+          Please reload the page and try again.
+        </p>
       </section>
     );
   }

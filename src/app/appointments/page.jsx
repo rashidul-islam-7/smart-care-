@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "All Appointment | SmartCare+",
+  description:
+    " Manage appointments, doctors, and healthcare services easily with SmartCare+.",
+  keywords: ["SmartCare+", "doctors", "healthcare", "appointments"],
+  authors: [{ name: "SmartCare+" }],
+};
+
 import AppointmentPageHero from "@/components/ui/AppointmentHero";
 import SearchDoctor from "@/components/ui/SearchDoctor";
 import { getDoctors } from "@/lib/Data";

@@ -2,45 +2,37 @@ import React from "react";
 import DoctorDetailHeroSection from "@/components/ui/DoctorDetailHero";
 import Image from "next/image";
 import {
-  FaArrowRight,
   FaCalendarCheck,
   FaLocationDot,
   FaMoneyCheck,
   FaStar,
 } from "react-icons/fa6";
 
-import {
-  Card,
-  FieldError,
-  Input,
-  Label,
-  Modal,
-  Radio,
-  RadioGroup,
-  Surface,
-  TextField,
-  Form,
-} from "@heroui/react";
-
 import { getDoctorId } from "@/lib/Data";
 import AppointmentModal from "@/components/share/AppointmentModal";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+  
+  const doctorDetails = await getDoctorId(id, token);
+  return {
+    title: `${doctorDetails.name} | SmartCare+`,
+    description: doctorDetails.description,
+  };
+}
 
 const DoctorDetailPage = async ({ params }) => {
-  const session = await auth.api.getSession({
+  const { id } = await params;
+  const { token } = await auth.api.getToken({
     headers: await headers(),
   });
 
-  const user = session?.user;
-  if (!user) {
-    redirect("/login");
-    return;
-  }
-
-  const { id } = await params;
-  const doctorDetails = await getDoctorId(id);
+  const doctorDetails = await getDoctorId(id, token);
   const {
     name,
     specialist,
@@ -164,247 +156,3 @@ const DoctorDetailPage = async ({ params }) => {
 };
 
 export default DoctorDetailPage;
-
-//    <div className="mt-10">
-
-//                         <Modal>
-
-//                             {/* Open Button */}
-//                             <Modal.Trigger>
-
-//                                 <button
-//                                     className="cursor-pointer rounded-full px-8 py-3 text-md font-semibold hover:to-[#012a4b] bg-linear-to-r from-[#012a4b] to-sky-500 text-white w-full flex justify-center items-center gap-2 transition-all duration-300"
-//                                 >
-//                                     Book Appointment
-
-//                                     <FaArrowRight />
-//                                 </button>
-
-//                             </Modal.Trigger>
-
-//                             {/* Modal Content */}
-//                             <Modal.Backdrop>
-
-//                                 <Modal.Container placement="auto">
-
-//                                     <Modal.Dialog className="sm:max-w-2xl">
-
-//                                         <Modal.CloseTrigger />
-
-//                                         {/* Header */}
-//                                         <Modal.Header>
-
-//                                             <Modal.Heading>
-//                                                 Doctor Appointment Form
-//                                             </Modal.Heading>
-
-//                                             <p className="mt-1 text-sm text-gray-500">
-//                                                 Fill out the form correctly to confirm your appointment.
-//                                             </p>
-
-//                                         </Modal.Header>
-
-//                                         {/* Body */}
-//                                         <Modal.Body className="p-6">
-
-//                                             <Surface variant="default">
-
-//                                                 <Card
-//                                                     className="w-full p-2 shadow-sm"
-//                                                     variant="default"
-//                                                 >
-
-//                                                     <Card.Content className="p-6">
-
-//                                                         <Form
-//                                                             className="flex flex-col gap-6"
-//                                                             onSubmit={(e) => {
-//                                                                 e.preventDefault();
-
-//                                                                 const formData = new FormData(
-//                                                                     e.currentTarget
-//                                                                 );
-
-//                                                                 const data = Object.fromEntries(
-//                                                                     formData.entries()
-//                                                                 );
-
-//                                                                 console.log(data);
-//                                                             }}
-//                                                         >
-
-//                                                             {/* Doctor Name */}
-//                                                             <TextField
-//                                                                 className="w-full flex flex-col gap-1.5"
-//                                                                 name="doctorName"
-//                                                             >
-
-//                                                                 <Label className="text-sm font-medium text-gray-700">
-//                                                                     Doctor Name
-//                                                                 </Label>
-
-//                                                                 <Input
-//                                                                     value={name}
-//                                                                     readOnly
-//                                                                     className="bg-gray-100 cursor-not-allowed"
-//                                                                 />
-
-//                                                             </TextField>
-
-//                                                             {/* Name & Phone */}
-//                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-
-//                                                                 <TextField
-//                                                                     isRequired
-//                                                                     className="w-full flex flex-col gap-1.5"
-//                                                                     name="patientName"
-//                                                                 >
-
-//                                                                     <Label>
-//                                                                         Patient Name
-//                                                                     </Label>
-
-//                                                                     <Input
-//                                                                         placeholder="Enter full name"
-//                                                                     />
-
-//                                                                     <FieldError />
-
-//                                                                 </TextField>
-
-//                                                                 <TextField
-//                                                                     isRequired
-//                                                                     className="w-full flex flex-col gap-1.5"
-//                                                                     name="phone"
-//                                                                     type="tel"
-//                                                                 >
-
-//                                                                     <Label>
-//                                                                         Phone Number
-//                                                                     </Label>
-
-//                                                                     <Input
-//                                                                         placeholder="+8801XXXXXXXXX"
-//                                                                     />
-
-//                                                                     <FieldError />
-
-//                                                                 </TextField>
-
-//                                                             </div>
-
-//                                                             {/* Date & Time */}
-//                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-
-//                                                                 <TextField
-//                                                                     isRequired
-//                                                                     className="w-full flex flex-col gap-1.5"
-//                                                                     name="date"
-//                                                                     type="date"
-//                                                                 >
-
-//                                                                     <Label>
-//                                                                         Appointment Date
-//                                                                     </Label>
-
-//                                                                     <Input />
-
-//                                                                     <FieldError />
-
-//                                                                 </TextField>
-
-//                                                                 <TextField
-//                                                                     isRequired
-//                                                                     className="w-full flex flex-col gap-1.5"
-//                                                                     name="time"
-//                                                                     type="time"
-//                                                                 >
-
-//                                                                     <Label>
-//                                                                         Appointment Time
-//                                                                     </Label>
-
-//                                                                     <Input type="time" />
-
-//                                                                     <FieldError />
-
-//                                                                 </TextField>
-
-//                                                             </div>
-
-//                                                             {/* Age & Gender */}
-//                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start w-full">
-
-//                                                                 <TextField
-//                                                                     isRequired
-//                                                                     className="w-full flex flex-col gap-1.5"
-//                                                                     name="age"
-//                                                                     type="number"
-//                                                                 >
-
-//                                                                     <Label>
-//                                                                         Age
-//                                                                     </Label>
-
-//                                                                     <Input
-//                                                                         placeholder="e.g. 25"
-//                                                                     />
-
-//                                                                     <FieldError />
-
-//                                                                 </TextField>
-
-//                                                                 {/* Gender */}
-//                                                                 <div className="flex flex-col gap-2">
-
-//                                                                     <Label className="text-sm font-medium text-gray-700">
-//                                                                         Gender
-//                                                                     </Label>
-
-//                                                                     <RadioGroup
-//                                                                         orientation="horizontal"
-//                                                                         name="gender"
-//                                                                         defaultValue="male"
-//                                                                     >
-
-//                                                                         <Radio value="male">
-//                                                                             Male
-//                                                                         </Radio>
-
-//                                                                         <Radio value="female">
-//                                                                             Female
-//                                                                         </Radio>
-
-//                                                                     </RadioGroup>
-
-//                                                                 </div>
-
-//                                                             </div>
-
-//                                                             {/* Submit Button */}
-//                                                             <button
-//                                                                 className="cursor-pointer rounded-full px-8 py-3 text-md font-semibold hover:to-[#012a4b] bg-linear-to-r from-[#012a4b] to-sky-500 text-white w-full flex justify-center items-center gap-2 transition-all duration-300"
-//                                                                 type="submit"
-//                                                             >
-//                                                                 Confirm Appointment
-//                                                             </button>
-
-//                                                         </Form>
-
-//                                                     </Card.Content>
-
-//                                                 </Card>
-
-//                                             </Surface>
-
-//                                         </Modal.Body>
-
-//                                     </Modal.Dialog>
-
-//                                 </Modal.Container>
-
-//                             </Modal.Backdrop>
-
-//                         </Modal>
-
-//                     </div>
