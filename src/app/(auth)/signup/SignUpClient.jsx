@@ -147,7 +147,7 @@ const SignUpClient = () => {
         <button
           disabled={loading}
           type="submit"
-          className="w-full h-12 rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.01] transition"
+          className="cursor-pointer w-full h-12 rounded-xl bg-linear-to-r from-blue-600 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.01] transition"
         >
           {loading ? "Creating account..." : "Create account"}
         </button>

@@ -67,7 +67,7 @@ const TopDoctors = async () => {
 
                   <Link
                     href={`/appointments/${doc._id}`}
-                    className="flex cursor-pointer justify-center px-5 items-center gap-1 bg-blue-600 hover:bg-blue-700 w-full py-1 rounded-full text-white text-sm transition-all duration-300"
+                    className="flex cursor-pointer justify-center px-5 items-center gap-1 bg-linear-to-r from-blue-600 to-cyan-500 hover:bg-blue-700 w-full py-1 rounded-full text-white text-sm transition-all duration-300"
                   >
                     View Details{" "}
                     <span className="group-hover:translate-x-2 transition-all duration-300">

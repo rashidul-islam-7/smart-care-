@@ -137,7 +137,7 @@ const AppointmentModal = ({ doctorDetails }) => {
     <Modal>
       {/* open button */}
       <Modal.Trigger>
-        <button className="cursor-pointer rounded-full px-8 py-3 text-white bg-linear-to-r from-[#012a4b] to-sky-500 w-full flex justify-center items-center gap-2">
+        <button className="cursor-pointer rounded-full px-8 py-3 text-white bg-linear-to-r from-blue-600 to-cyan-500 w-full flex justify-center items-center gap-2">
           Book Appointment <FaArrowRight />
         </button>
       </Modal.Trigger>
@@ -319,7 +319,7 @@ const AppointmentModal = ({ doctorDetails }) => {
                     {/* submit button */}
                     <div>
                       <Button
-                        className="rounded-full px-8 py-6 text-md font-semibold bg-linear-to-r from-[#012a4b] to-sky-500 text-white w-full flex justify-center items-center gap-2 transition-all duration-300"
+                        className="rounded-full px-8 py-6 text-md font-semibold bg-linear-to-r from-blue-600 to-cyan-500 text-white w-full flex justify-center items-center gap-2 transition-all duration-300"
                         variant="primary"
                         type="submit"
                         isPending={isPending}

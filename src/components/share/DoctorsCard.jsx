@@ -78,7 +78,8 @@ const DoctorCard = ({ doctor }) => {
                 {/* CTA Button */}
                 <Link href={`/appointments/${_id}`}>
                     <Button icon={<FaArrowRight />}
-                        className="w-full inline-flex text-center justify-center mt-2"
+                        className="w-full inline-flex text-center
+                         justify-center mt-2"
                     >
                         View Details
                     </Button>
